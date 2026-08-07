@@ -1,0 +1,157 @@
+<div>
+  <mat-card style="padding: 20px;">
+    <mat-card-title style="margin-bottom: 20px;">Criar Ordem de Serviço</mat-card-title>
+    
+    <form [formGroup]="formOrdemServico">
+      <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+        <mat-form-field appearance="outline">
+          <mat-label>Data Entrada</mat-label>
+          <input matInput mask="d0/m0/0000" [dropSpecialCharacters]="false" placeholder="Ex: 25/12/2026" formControlName="data_entrada" />
+          @if (hasError('data_entrada', 'required')) { 
+            <mat-error>O campo Data Entrada é obrigatório</mat-error> 
+          }
+          @if (hasError('data_entrada', 'maxlength')) { 
+            <mat-error>Tamanho máximo 10 caracteres</mat-error> 
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Data Saida</mat-label>
+          <input matInput mask="d0/m0/0000" [dropSpecialCharacters]="false" placeholder="Ex: 25/12/2026" formControlName="data_saida" />
+          @if (hasError('data_saida', 'maxlength')) { 
+            <mat-error>Tamanho máximo 10 caracteres</mat-error> 
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="clienteId">
+            @for (cliente of clientes; track cliente.id) { 
+              <mat-option [value]="cliente.id">{{ cliente.nome }}</mat-option> 
+            }
+          </mat-select>
+          @if (hasError('clienteId', 'required')) { 
+            <mat-error>O campo Cliente é obrigatório</mat-error> 
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="flex: 1; min-width: 200px;">
+          <mat-label>Automóvel</mat-label>
+          <mat-select formControlName="automovelId">
+            @for (auto of automoveis; track auto.id) { 
+              <mat-option [value]="auto.id">{{ auto.modelo }} - {{ auto.placa }}</mat-option> 
+            }
+          </mat-select>
+          @if (hasError('automovelId', 'required')) { 
+            <mat-error>O campo Automóvel é obrigatório</mat-error> 
+          }
+        </mat-form-field>
+
+        <mat-form-field class="observacao_ordem_servico" appearance="outline" style="width: 100%;">
+          <textarea matInput formControlName="observacao" rows="3"></textarea>
+          <mat-label>Observação</mat-label>
+          @if (hasError('observacao', 'maxlength')) { 
+            <mat-error>Tamanho máximo 1000 caracteres</mat-error> 
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Seção Dinâmica de Serviços (Vários para Vários / FormArray) -->
+      <div class="servicos-section" style="border-top: 1px solid #ccc; padding-top: 20px; margin-bottom: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3>Serviços Solicitados</h3>
+          <button mat-raised-button color="primary" type="button" (click)="adicionarServico()"> 
+            + Adicionar Serviço 
+          </button>
+        </div>
+
+        <!-- Aponta para a chave interna correta do formulário: formServicos -->
+        <div formArrayName="formServicos">
+          <!-- Utiliza o getter público 'servicos' declarado no arquivo TypeScript -->
+          @for (item of servicos.controls; track $index) {
+            <div [formGroupName]="$index" class="servico-linha" style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
+              
+              <!-- Seleção do Serviço com Angular Material -->
+              <mat-form-field appearance="outline" style="flex: 2; min-width: 200px;">
+                <mat-label>Serviço</mat-label>
+                <mat-select formControlName="servicoId" (selectionChange)="onServicoSelecionado($index, $event.value)">
+                  @for (s of listaServicos; track s.id) { 
+                    <mat-option [value]="s.id">{{ s.descricao }}</mat-option> 
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <!-- Quantidade -->
+              <mat-form-field appearance="outline" style="flex: 0.8; min-width: 80px;">
+                <mat-label>Qtd</mat-label>
+                <input matInput type="number" formControlName="quantidade" min="1">
+              </mat-form-field>
+
+              <!-- Preço Unitário -->
+              <mat-form-field appearance="outline" style="flex: 1.2; min-width: 100px;">
+                <mat-label>Vlr. Unitário</mat-label>
+                <input matInput type="number" formControlName="valor_unitario" min="0">
+              </mat-form-field>
+
+              <!-- Valor Total (Calculado Automaticamente) -->
+              <mat-form-field appearance="outline" style="flex: 1.2; min-width: 100px;">
+                <mat-label>Total</mat-label>
+                <input matInput type="number" formControlName="valor_total" readonly>
+              </mat-form-field>
+
+              <!-- Botão para Remover o Item do Array -->
+              <button mat-flat-button color="warn" type="button" (click)="removerServico($index)" style="height: 54px; margin-bottom: 22px;"> 
+                Remover 
+              </button>
+            </div>
+          } @empty {
+            <p style="color: #666; font-style: italic; margin-top: 10px;"> 
+              Nenhum serviço adicionado a esta ordem. Clique no botão acima para adicionar. 
+            </p>
+          }
+        </div>
+      </div>
+    </form>
+
+    <!-- Exibição dos Dados do Cliente -->
+    <div class="mat-mdc-card-subtitle" style="font-weight: bold; margin-bottom: 10px;">Dados do Cliente</div>
+    <form [formGroup]="formCliente" style="margin-bottom: 20px;">
+      <div style="display: flex; gap: 15px;">
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Cpf</mat-label>
+          <input matInput formControlName="cpf" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" />
+        </mat-form-field>
+      </div>
+    </form>
+
+    <!-- Exibição dos Dados do Automóvel -->
+    <div class="mat-mdc-card-subtitle" style="font-weight: bold; margin-bottom: 10px;">Dados do Automóvel</div>
+    <form [formGroup]="formAutomovel" style="margin-bottom: 30px;">
+      <div style="display: flex; gap: 15px;">
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Placa</mat-label>
+          <input matInput formControlName="placa" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="flex: 1;">
+          <mat-label>Cor</mat-label>
+          <input matInput formControlName="cor" />
+        </mat-form-field>
+      </div>
+    </form>
+
+    <!-- Botão de Ação -->
+    <div style="display: flex; justify-content: flex-end;">
+      <button mat-raised-button (click)="criar()" color="primary" [disabled]="!formOrdemServico.valid" style="padding: 10px 30px; font-size: 16px;"> 
+        Salvar 
+      </button>
+    </div>
+  </mat-card>
+</div>

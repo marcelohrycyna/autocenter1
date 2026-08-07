@@ -1,0 +1,42 @@
+<div>
+    <mat-card>
+        <mat-card-title>Criar Cidade</mat-card-title>
+        <form [formGroup]="formCidade">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" />
+                    @if (hasError('nome', 'required')) {
+                        <mat-error>O campo Nome é obrigatório</mat-error>
+                    }
+                    @if (hasError('nome', 'maxlength')) {
+                        <mat-error>Tamanho máximo 30 caracteres</mat-error>
+                    }
+                    @if (hasError('nome', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <mat-select placeholder="Selecione um estado" formControlName="estadoId">
+                        @for (estado of estados; track estado.id) {
+                            <mat-option [value]="estado.id">{{ estado.nome }}</mat-option>
+                        }
+                    </mat-select>
+                    @if (hasError('estadoId', 'required')) {
+                        <mat-error>O campo Estado é obrigatório</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </form>
+        <button
+            mat-raised-button
+            (click)="criar()"
+            color="primary"
+            [disabled]="!formCidade.valid"
+        >
+            Salvar
+        </button>
+    </mat-card>
+</div>

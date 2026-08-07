@@ -1,0 +1,42 @@
+<div>
+    <mat-card>
+        <mat-card-title>Cadastrar Pais</mat-card-title>
+        <form [formGroup]="formPais">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" />
+                    @if (hasError('nome', 'required')) {
+                        <mat-error>O campo Nome é obrigatório</mat-error>
+                    }
+                    @if (hasError('nome', 'maxlength')) {
+                        <mat-error>Tamanho máximo 30 caracteres</mat-error>
+                    }
+                    @if (hasError('nome', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-label>Sigla</mat-label>
+                <input matInput formControlName="sigla" />
+                @if (hasError('sigla', 'required')) {
+                    <mat-error>O campo Sigla é obrigatório</mat-error>
+                }
+                @if (hasError('sigla', 'maxlength')) {
+                    <mat-error>Tamanho máximo 2 caracteres</mat-error>
+                }
+                @if (hasError('sigla', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                }
+            </div>
+        </form>
+        <button
+            mat-raised-button
+            (click)="criar()"
+            color="primary"
+            [disabled]="!formPais.valid"
+        >
+            Salvar
+        </button>
+    </mat-card>
+</div>

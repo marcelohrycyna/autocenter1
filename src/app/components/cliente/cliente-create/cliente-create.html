@@ -1,0 +1,109 @@
+<div>
+    <mat-card>
+        <mat-card-title>Criar Cliente</mat-card-title>
+        <form [formGroup]="formCliente">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" />
+                    @if (hasError('nome', 'required')) {
+                        <mat-error>O campo Nome é obrigatório</mat-error>
+                    }
+                    @if (hasError('nome', 'maxlength')) {
+                        <mat-error>Tamanho máximo 150 caracteres</mat-error>
+                    }
+                    @if (hasError('nome', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Rua</mat-label>
+                    <input matInput formControlName="rua" />
+                    @if (hasError('rua', 'maxlength')) {
+                        <mat-error>Tamanho máximo 150 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Numero</mat-label>
+                    <input matInput formControlName="numero" />
+                    @if (hasError('numero', 'maxlength')) {
+                        <mat-error>Tamanho máximo 100 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Cep</mat-label>
+                    <input matInput formControlName="cep" />
+                    @if (hasError('cep', 'maxlength')) {
+                        <mat-error>Tamanho máximo 50 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Bairro</mat-label>
+                    <input matInput formControlName="bairro" />
+                    @if (hasError('bairro', 'maxlength')) {
+                        <mat-error>Tamanho máximo 100 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Complemento</mat-label>
+                    <input matInput formControlName="complemento" />
+                    @if (hasError('complemento', 'maxlength')) {
+                        <mat-error>Tamanho máximo 150 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="exemplo@email.com" />
+                    @if (formCliente.get('email')?.hasError('email') && formCliente.get('email')?.touched) {
+                    <mat-error>Por favor, insira um e-mail válido</mat-error>
+                    }
+                    @if (formCliente.get('email')?.hasError('maxlength') && formCliente.get('email')?.touched) {
+                    <mat-error>Tamanho máximo 200 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Cpf</mat-label>
+                    <input type="text" matInput mask="000.000.000-00" [dropSpecialCharacters]="true" [validation]="true" formControlName="cpf" />
+                    @if (hasError('cpf', 'mask')) {
+                        <mat-error>Digite um CPF válido com 11 dígitos</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Telefone</mat-label>
+                    <input type="text" matInput mask="00 00000-0000" [dropSpecialCharacters]="true" [validation]="true" formControlName="telefone" />
+                    @if (hasError('telefone', 'mask')) {
+                        <mat-error>Digite um telefone válido</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Cidade</mat-label>
+                    <mat-select placeholder="Selecione uma cidade" formControlName="cidadeId">
+                        @for (cidade of cidades; track cidade.id) {
+                            <mat-option [value]="cidade.id">{{ cidade.nome }}</mat-option>
+                        }
+                    </mat-select>
+                    @if (hasError('cidadeId', 'required')) {
+                        <mat-error>O campo Cidade é obrigatório</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </form>
+        <button
+            mat-raised-button
+            (click)="criar()"
+            color="primary"
+            [disabled]="!formCliente.valid"
+        >
+            Salvar
+        </button>
+    </mat-card>
+</div>

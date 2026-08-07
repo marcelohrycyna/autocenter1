@@ -1,0 +1,61 @@
+<div id="div_nav">
+    <mat-sidenav-container class="sidenav-container">
+        <!-- Menu Lateral Fixo à Esquerda -->
+        <mat-sidenav mode="side" opened="true">
+            <button mat-button routerLink="/" class="menu-item main-item">
+                <i class="material-icons icon-fixed">dashboard</i>Dashboard
+            </button>
+            <mat-accordion multi="true" class="menu-accordion">
+
+                <!-- Cadastros Gerais -->
+                <mat-expansion-panel class="category-panel" [expanded]="false">
+                    <mat-expansion-panel-header class="category-header">
+                        <mat-panel-title class="category-title">
+                            Cadastros Gerais
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- Subcategorias de Cadastros Gerais -->
+                    <div class="sub-items-container">
+                        <button mat-button routerLink="/pais" class="menu-item sub-item">Países</button>
+                        <button mat-button routerLink="/estado" class="menu-item sub-item">Estados</button>
+                        <button mat-button routerLink="/cidade" class="menu-item sub-item">Cidades</button>
+                        <button mat-button routerLink="/servico" class="menu-item sub-item">Serviços</button>
+                    </div>
+                </mat-expansion-panel>
+
+                <!-- Cadastros Clientes -->
+                <mat-expansion-panel class="category-panel" [expanded]="false">
+                    <mat-expansion-panel-header class="category-header">
+                        <mat-panel-title class="category-title">
+                            Cadastros de Clientes
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- Subcategorias de Cadastros Clientes -->
+                    <div class="sub-items-container">
+                        <button mat-button routerLink="/cliente" class="menu-item sub-item">Clientes</button>
+                        <button mat-button routerLink="/automovel" class="menu-item sub-item">Automoveis</button>
+                    </div>
+                </mat-expansion-panel>
+
+                <!-- Ordem Servico -->
+                <mat-expansion-panel class="category-panel" [expanded]="false">
+                    <mat-expansion-panel-header class="category-header">
+                        <mat-panel-title class="category-title">
+                            Ordem de Serviço
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <!-- Subcategorias de Ordem de Servico -->
+                    <div class="sub-items-container">
+                        <button mat-button routerLink="/ordem-servico" class="menu-item sub-item">Listar</button>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-sidenav>
+
+        <!-- Conteúdo Principal à Direita -->
+        <mat-sidenav-content class="content">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+</div>

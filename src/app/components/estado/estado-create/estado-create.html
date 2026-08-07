@@ -1,0 +1,56 @@
+<div>
+    <mat-card>
+        <mat-card-title>Criar Estado</mat-card-title>
+        <form [formGroup]="formEstado">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="nome" />
+                    @if (hasError('nome', 'required')) {
+                        <mat-error>O campo Nome é obrigatório</mat-error>
+                    }
+                    @if (hasError('nome', 'maxlength')) {
+                        <mat-error>Tamanho máximo 30 caracteres</mat-error>
+                    }
+                    @if (hasError('nome', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Sigla</mat-label>
+                    <input matInput formControlName="sigla" />
+                    @if (hasError('sigla', 'required')) {
+                        <mat-error>O campo Sigla é obrigatório</mat-error>
+                    }
+                    @if (hasError('sigla', 'maxlength')) {
+                        <mat-error>Tamanho máximo 2 caracteres</mat-error>
+                    }
+                    @if (hasError('sigla', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>País</mat-label>
+                    <mat-select placeholder="Selecione um país" formControlName="paisId">
+                        @for (pais of paises; track pais.id) {
+                            <mat-option [value]="pais.id">{{ pais.nome }}</mat-option>
+                        }
+                    </mat-select>
+                    @if (hasError('paisId', 'required')) {
+                        <mat-error>O campo País é obrigatório</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </form>
+        <button
+            mat-raised-button
+            (click)="criar()"
+            color="primary"
+            [disabled]="!formEstado.valid"
+        >
+            Salvar
+        </button>
+    </mat-card>
+</div>

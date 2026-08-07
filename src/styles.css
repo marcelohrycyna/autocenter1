@@ -1,0 +1,95 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "../node_modules/ngx-toastr/toastr.css";
+
+div#div_nav{
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.mat-table{
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.table{
+  display: block !important;
+}
+
+.mat-cell{
+  word-wrap: normal;
+  display: table-cell;
+  padding: 8px 8px 8px 8px;
+  line-break: unset;
+  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: left;
+}
+
+table{
+  width: 100%;
+  overflow: scroll;
+}
+
+tr.mat-header-row,
+tr.mat-mdc-header-row,
+tr.mat-mdc-header-row * {
+  background-color: aliceblue !important;
+}
+
+th[mat-header-cell],
+th.mat-header-cell,
+th.mat-mdc-header-cell {
+  text-align: left;
+  background-color: aliceblue !important;
+  color: cadetblue !important;
+  font-size: 15px;
+  font-weight: 570;
+  vertical-align: middle;
+}
+
+/* Se estiver usando Angular 15+, o Material usa os prefixos .mat-mdc */
+:host ::vdeep .mat-mdc-text-field-wrapper {
+  width: 600px !important;
+}
+
+
+/* Tipo Serviço */
+.tipo_servico {
+  width: 600px;
+  max-width: 600px;
+  display: inline-block;
+}
+
+.descricao_servico {
+  width: 600px;
+  max-width: 600px;
+  display: inline-block;
+}
+
+.textarea-descricao_servico textarea {
+  resize: none;
+}
+
+.observacao_ordem_servico {
+  width: 800px;
+  max-width: 800px;
+  display: inline-block;
+}
+
+.status-fechado {
+  color: red;
+  font-weight: bold;
+}
+
+.status-aberto {
+  color: green;
+}

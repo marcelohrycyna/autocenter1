@@ -1,0 +1,106 @@
+#div_nav { 
+  height: 100vh; 
+  display: flex; 
+} 
+
+mat-sidenav-container { 
+  display: flex; 
+  flex: 1; 
+  height: 100%; 
+} 
+
+/* Menu Lateral */
+mat-sidenav { 
+  width: 260px; /* Define uma largura fixa ideal para o menu */
+  overflow: auto; 
+  background-color: #1e88e5; /* Azul Principal */
+} 
+
+/* Botões do Menu (Geral) */
+mat-sidenav button { 
+  display: block; 
+  width: 100%; 
+  text-align: left; 
+  margin: 0 !important; 
+  font-size: 16px; 
+  color: white !important; /* Texto branco para contrastar com o azul */
+} 
+
+mat-sidenav button i.icon-fixed { 
+  display: inline-block; 
+  width: 24px; 
+  text-align: center; 
+  margin-right: 12px; 
+  vertical-align: middle; 
+} 
+
+mat-sidenav button.main-item { 
+  padding: 12px 16px !important; 
+} 
+
+/* ==========================================================================
+   Ajustes para as Categorias (mat-accordion / mat-expansion-panel)
+   ========================================================================== */
+
+/* Remove fundos brancos, sombras e bordas do painel para fundir com o menu azul */
+mat-accordion.menu-accordion,
+.category-panel {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Estiliza o cabeçalho "Cadastros Gerais" */
+.category-header {
+  padding: 0 16px !important; /* Alinha horizontalmente com o botão Dashboard */
+  height: 48px !important;
+}
+
+/* Força o título a ficar branco e herdar o tamanho de fonte correto */
+.category-title {
+  color: white !important;
+  font-size: 16px !important;
+  font-weight: normal !important;
+}
+
+/* Altera a cor da setinha de expansão para branco */
+::ng-deep .category-panel .mat-expansion-indicator::after {
+  color: white !important;
+}
+
+/* Força a abertura perfeita do painel */
+::ng-deep .mat-expansion-panel-body { 
+  padding: 0 !important; 
+  display: block !important; 
+  visibility: visible !important; 
+} 
+
+/* ==========================================================================
+   Ajustes para as Subcategorias (Países e Estados)
+   ========================================================================== */
+
+/* Container das subcategorias ganha um tom azul ligeiramente mais escuro */
+.sub-items-container { 
+  display: flex; 
+  flex-direction: column; 
+  background-color: #1565c0; /* Azul escuro harmônico */
+} 
+
+/* Subitens ajustados para herdar o visual do menu */
+mat-sidenav button.sub-item { 
+  padding: 12px 16px 12px 40px !important; /* Recuo à esquerda para efeito de hierarquia */
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85) !important; /* Branco levemente suave */
+} 
+
+/* Efeito ao passar o mouse por cima dos subitens */
+mat-sidenav button.sub-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+/* Área de Conteúdo à Direita */
+mat-sidenav-content { 
+  flex: 1; 
+  overflow: auto; 
+  background-color: #fafafa; /* Cinza bem claro para destacar o fundo do app */
+}

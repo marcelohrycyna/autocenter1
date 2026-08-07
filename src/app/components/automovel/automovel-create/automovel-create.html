@@ -1,0 +1,74 @@
+<div>
+    <mat-card>
+        <mat-card-title>Criar Automovel</mat-card-title>
+        <form [formGroup]="formAutomovel">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Modelo</mat-label>
+                    <input matInput formControlName="modelo" />
+                    @if (hasError('modelo', 'required')) {
+                        <mat-error>O campo Modelo é obrigatório</mat-error>
+                    }
+                    @if (hasError('modelo', 'maxlength')) {
+                        <mat-error>Tamanho máximo 100 caracteres</mat-error>
+                    }
+                    @if (hasError('modelo', 'minlength')) {
+                        <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Marca</mat-label>
+                    <input matInput formControlName="marca" />
+                    @if (hasError('marca', 'maxlength')) {
+                        <mat-error>Tamanho máximo 100 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input matInput formControlName="ano" />
+                    @if (hasError('ano', 'maxlength')) {
+                        <mat-error>Tamanho máximo 4 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Cor</mat-label>
+                    <input matInput formControlName="cor" />
+                    @if (hasError('cor', 'maxlength')) {
+                        <mat-error>Tamanho máximo 50 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Placa</mat-label>
+                    <input matInput formControlName="placa" />
+                    @if (hasError('placa', 'maxlength')) {
+                        <mat-error>Tamanho máximo 10 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Cliente</mat-label>
+                    <mat-select placeholder="Selecione um cliente" formControlName="clienteId">
+                        @for (cliente of clientes; track cliente.id) {
+                            <mat-option [value]="cliente.id">{{ cliente.nome }}</mat-option>
+                        }
+                    </mat-select>
+                    @if (hasError('clienteId', 'required')) {
+                        <mat-error>O campo Cliente é obrigatório</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </form>
+        <button
+            mat-raised-button
+            (click)="criar()"
+            color="primary"
+            [disabled]="!formAutomovel.valid"
+        >
+            Salvar
+        </button>
+    </mat-card>
+</div>

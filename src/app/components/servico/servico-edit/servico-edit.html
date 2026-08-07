@@ -1,0 +1,47 @@
+<div>
+    <mat-card>
+        <mat-card-title>Editar Serviço</mat-card-title>
+        <form [formGroup]="formServico">
+            <div>
+                <mat-form-field class="tipo_servico" appearance="outline">
+                    <mat-label>Tipo</mat-label>
+                    <input matInput formControlName="tipo" />
+                    @if (hasError('tipo', 'required')) {
+                    <mat-error>O campo Tipo é obrigatório</mat-error>
+                    }
+                    @if (hasError('tipo', 'maxlength')) {
+                    <mat-error>Tamanho máximo 200 caracteres</mat-error>
+                    }
+                    @if (hasError('tipo', 'minlength')) {
+                    <mat-error>Tamanho mínimo 2 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field class="descricao_servico" appearance="outline">
+                    <textarea matInput formControlName="descricao" rows="3"></textarea>
+                    <mat-label>Descricao</mat-label>
+                    @if (hasError('descricao', 'maxlength')) {
+                    <mat-error>Tamanho máximo 500 caracteres</mat-error>
+                    }
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Valor</mat-label>
+                    <span matPrefix>R$&nbsp;</span>
+                    <input matInput formControlName="valor" mask="separator.2" thousandSeparator="." decimalMarker=","
+                        [dropSpecialCharacters]="true"/>
+                    @if (hasError('valor', 'required')) {
+                    <mat-error>O campo Valor é obrigatório</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-raised-button (click)="update()" color="primary" [disabled]="!formServico.valid">
+            Salvar
+        </button>
+    </mat-card>
+</div>
