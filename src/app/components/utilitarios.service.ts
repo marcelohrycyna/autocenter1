@@ -29,7 +29,6 @@ export class UtilitariosService {
     // Método auxiliar para formatar a string numérica ou com barras para DD-MM-YYYY
     formatarDataParaPadraoBr(data: string): string | null {
         if (!data) return null;
-        console.log('antes',data)
 
         // Isola os 10 primeiros caracteres caso venha no formato Date/Time (Ex: "2026-07-31T20:00:00Z")
         const dataApenas = data.substring(0, 10);
@@ -45,7 +44,6 @@ export class UtilitariosService {
         const dia = partes[2];
 
         // Garante o retorno estruturado no formato "dd-mm-yyyy"
-        console.log('depois',`${dia}-${mes}-${ano}`)
         return `${dia}-${mes}-${ano}`;
     }
 }

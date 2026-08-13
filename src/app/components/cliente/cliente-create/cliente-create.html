@@ -35,7 +35,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Cep</mat-label>
-                    <input matInput formControlName="cep" />
+                    <input matInput mask="CEP" formControlName="cep" />
                     @if (hasError('cep', 'maxlength')) {
                         <mat-error>Tamanho máximo 50 caracteres</mat-error>
                     }
@@ -70,7 +70,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Cpf</mat-label>
-                    <input type="text" matInput mask="000.000.000-00" [dropSpecialCharacters]="true" [validation]="true" formControlName="cpf" />
+                    <input type="text" matInput mask="CPF_CNPJ" [dropSpecialCharacters]="true" [validation]="true" formControlName="cpf" />
                     @if (hasError('cpf', 'mask')) {
                         <mat-error>Digite um CPF válido com 11 dígitos</mat-error>
                     }
@@ -78,7 +78,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Telefone</mat-label>
-                    <input type="text" matInput mask="00 00000-0000" [dropSpecialCharacters]="true" [validation]="true" formControlName="telefone" />
+                    <input type="text" matInput mask="TEL" [dropSpecialCharacters]="true" [validation]="true" formControlName="telefone" />
                     @if (hasError('telefone', 'mask')) {
                         <mat-error>Digite um telefone válido</mat-error>
                     }

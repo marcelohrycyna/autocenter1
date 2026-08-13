@@ -12,9 +12,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ClienteEdit } from '../cliente-edit/cliente-edit';
 import { forkJoin } from 'rxjs';
 import { CrudService } from '../../crud.service';
-import { NgxMaskPipe } from 'ngx-mask';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { AutomovelCreate } from '../../automovel/automovel-create/automovel-create';
 import { AutomovelListModal } from '../../automovel-list-modal/automovel-list-modal';
+
 
 @Component({
   selector: 'app-cliente-list',

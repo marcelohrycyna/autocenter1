@@ -25,7 +25,14 @@ export const appConfig: ApplicationConfig = {
       closeButton: true,
       progressBar: true,
     }),
-    provideEnvironmentNgxMask(),
+    provideEnvironmentNgxMask(
+      {
+        maskAliases: {
+          TEL: '(00) 0000-0000||(00) 00000-0000',
+          CEP: '00000-000'
+        }
+      }
+    ),
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
 };

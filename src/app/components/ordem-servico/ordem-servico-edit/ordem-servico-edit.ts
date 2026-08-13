@@ -13,6 +13,7 @@ import { UtilitariosService } from '../../utilitarios.service';
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
+
 @Component({
   selector: 'app-ordem-servico-edit',
   standalone: true,
@@ -52,7 +53,8 @@ export class OrdemServicoEdit implements OnInit {
     private crudService: CrudService,
     private utilitariosService: UtilitariosService,
     private dialogRef: MatDialogRef<OrdemServicoEdit>,
-    private router: Router
+    private router: Router,
+    private utilService: UtilitariosService 
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -73,6 +75,7 @@ export class OrdemServicoEdit implements OnInit {
       telefone: [''],
       cidade: ['']
     });
+
     this.formCliente.disable();
 
     this.formAutomovel = this.fb.group({
