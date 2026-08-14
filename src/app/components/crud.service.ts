@@ -35,8 +35,12 @@ export class CrudService{
     }
 
     getByClienteId(resource: string, id: string): Observable<any>{
-        console.log('resource: ', resource, 'id: ', id)
         return this.http.get<any[]>(`${this.serverUrl}${resource}/cliente/${id}`);
+    }
+
+    getPersonalizado(resource: string, pathPersonalizado: string): Observable<any>{
+        console.log(`${this.serverUrl}${resource}${pathPersonalizado}`);
+        return this.http.get<any[]>(`${this.serverUrl}${resource}${pathPersonalizado}`);
     }
 
     private get toastrService(): ToastrService{

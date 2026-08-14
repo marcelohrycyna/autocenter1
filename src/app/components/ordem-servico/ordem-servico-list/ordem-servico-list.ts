@@ -14,10 +14,11 @@ import { DatePipe } from '@angular/common';
 import { NgClass } from '@angular/common'
 import { OrdemServicoCreate } from '../ordem-servico-create/ordem-servico-create';
 import { OrdemServicoEdit } from '../ordem-servico-edit/ordem-servico-edit';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-ordem-servico-list',
-  imports: [MatIconModule, MatCardModule, MatFormFieldModule, MatTableModule, MatListModule, MatInputModule, MatButtonModule, MatCheckboxModule, NgClass, DatePipe],
+  imports: [MatIconModule, MatCardModule, MatFormFieldModule, MatTableModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule, NgClass, DatePipe],
   templateUrl: './ordem-servico-list.html',
   styleUrl: './ordem-servico-list.css',
 })
@@ -31,9 +32,6 @@ export class OrdemServicoList implements OnInit {
 
   ngOnInit(): void{
     this.configurarFiltro();
-    this.getOrdemServicos();
-
-
   }
   openDialogCreate(): void {
     const dialogRef = this.dialog.open(OrdemServicoCreate, {});
@@ -122,6 +120,25 @@ export class OrdemServicoList implements OnInit {
 
   getOrdemServicos(): void {
     this.crudService.getAll(this.resource).subscribe({
+      next: (retorno: any[]) => {
+        this.oss = retorno ?? [];
+        this.dataSource.data = this.oss;
+      },
+      error: (err: any) => {
+        console.error('Erro ao buscar as Ordens de Serviço:', err);
+      }
+    });
+  }
+
+  onPesquisarPorChange(status :string) :void {
+    let rotaStatus = '/status'; 
+
+    if (status === 'fechado') {
+        rotaStatus = '/status/true';
+    } else if (status === 'aberto') {
+        rotaStatus = '/status/false';
+    }
+    this.crudService.getPersonalizado(this.resource, rotaStatus).subscribe({
       next: (retorno: any[]) => {
         this.oss = retorno ?? [];
         this.dataSource.data = this.oss;
