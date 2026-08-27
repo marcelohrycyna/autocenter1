@@ -163,10 +163,17 @@
     </mat-dialog-content>
 
 
-
-    <!-- Botão de Ação -->
+        
     <mat-dialog-actions
         style="display: flex; justify-content: flex-end; gap: 10px; padding: 15px 0 0 0; border-top: 1px solid #eee;">
+
+        <!-- Imprimir -->
+        <button mat-raised-button (click)="imprimir()" color="primary" [disabled]="!formOrdemServico.valid || formOrdemServico.dirty"
+            style="padding: 10px 30px; font-size: 16px;">
+            Imprimir
+        </button>
+
+        <!-- Salvar -->
         <button mat-raised-button (click)="update()" color="primary" [disabled]="!formOrdemServico.valid"
             style="padding: 10px 30px; font-size: 16px;">
             Salvar

@@ -39,8 +39,11 @@ export class CrudService{
     }
 
     getPersonalizado(resource: string, pathPersonalizado: string): Observable<any>{
-        console.log(`${this.serverUrl}${resource}${pathPersonalizado}`);
         return this.http.get<any[]>(`${this.serverUrl}${resource}${pathPersonalizado}`);
+    }
+
+    getFilePersonalizado(resource: string, pathPersonalizado: string): Observable<any>{
+        return this.http.get(`${this.serverUrl}${resource}${pathPersonalizado}`, { responseType: 'blob' });
     }
 
     private get toastrService(): ToastrService{

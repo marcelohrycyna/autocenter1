@@ -258,6 +258,31 @@ export class OrdemServicoEdit implements OnInit {
     }
   }
 
+  imprimir() {
+  if (this.formOrdemServico.valid) {
+    try {
+      // Alterado para chamar o método correto: getFilePersonalizado
+      this.crudService.getFilePersonalizado(this.resource, '/pdf/' + this.dataId).subscribe({
+        next: (blob: Blob) => {
+          // 1. Cria uma URL temporária para o arquivo PDF
+          const fileURL = URL.createObjectURL(blob);
+          
+          // 2. Abre o PDF em uma nova aba para visualização/impressão
+          window.open(fileURL, '_blank');
+
+          // Mantém o comportamento original do seu formulário
+          this.submitclicked.emit(blob);
+          this.dialogRef.close();
+        },
+        error: (err) => console.error('Erro ao gerar o arquivo:', err),
+      });
+    } catch (err: unknown) {
+      this.crudService.showMessage(`Error ${err}`, true);
+      this.router.navigate(['/ordem-servico']);
+    }
+  }
+}
+
   private async PreencherFormGroupCliente(obj: any): Promise<void> {
     const cliente = obj ?? {};
 
@@ -304,6 +329,9 @@ export class OrdemServicoEdit implements OnInit {
     });
     this.clienteId = os.clienteId;
     this.automovelId = os.automovelId;
+
+    // Marca o formulário como limpo
+      this.formOrdemServico.markAsPristine();
   }
 
   private async PreencherFormServicos(obj: any): Promise<void> {
