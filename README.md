@@ -57,3 +57,16 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Prints do sistema
+
+Tela com a listagem das Ordens de Serviço<p>
+<img src="Print-lista-os.PNG" alt="Print Listagem OS" width="500" height="300">
+
+Tela Edição Ordem de Serviço<p>
+<img src="Print-editar-os.PNG" alt="Print Editar Ordem de Serviço" width="500" height="300">
+
+Impressão da ordem de Serviço<p>
+<img src="Print-impressao-os.PNG" alt="Print Impressão Ordem de Serviço" width="500" height="300">
+
+
